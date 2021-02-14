@@ -137,4 +137,4 @@ curl -o /mnt/root/setup/setup-root.sh https://raw.githubusercontent.com/Link512/
 
 umount -R /mnt
 
-echo "time for reboot. bye bye"
+echo "time for reboot. bye bye!!"

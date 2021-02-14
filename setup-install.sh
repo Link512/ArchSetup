@@ -102,7 +102,7 @@ cat <<EOF >/mnt/etc/hosts
 127.0.0.1 ${HOSTNAME}
 EOF
 
-echo "Move 'keyboard encrypt lvm2' before filesystem in HOOKS. IF USING NVME set MODULES=(nvme) Press enter to continue"
+echo "Move 'keyboard encrypt lvm2' before filesystem in HOOKS. IF USING NVME set MODULES=(nvme) Press enter"
 read TMP
 vim /mnt/etc/mkinitcpio.conf
 

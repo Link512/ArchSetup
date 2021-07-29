@@ -7,6 +7,9 @@ set -euo pipefail
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
+cd .. && rm -rf yay
+
+yay -S 1password 1password-cli insync insync-dolphin tfenv sshrc spotify up visual-studio-code-bin
 
 cat <<EOF >${HOME}/.xinitrc
 #!/bin/bash

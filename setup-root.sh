@@ -43,7 +43,7 @@ pacman -S xorg xorg-server xorg-apps xorg-xinit --noconfirm
 # greeter & plasma
 
 pacman -S plasma --noconfirm
-pacman -S dolphin dolphin-plugins ark kamoso kcalc kdenetwork-filesharing kfind kipi-plugins kmix knotes kompare konsole print-manager --noconfirm
+pacman -S dolphin dolphin-plugins ark kamoso kcalc kdenetwork-filesharing kfind kipi-plugins kmix kgpg knotes kompare konsole kamoso kwalletmanager print-manager --noconfirm
 
 # sound, network and such
 
@@ -58,7 +58,11 @@ pacman -S pyenv go gnupg zsh zsh-completions zsh-autosuggestions zsh-syntax-high
 
 # basics
 
-pacman -S firefox libfido2 yubikey-manager-qt breeze-gtk kde-gtk-config xdg-desktop-portal xdg-desktop-portal-kde plasma-browser-integration util-linux --noconfirm
+pacman -S firefox libfido2 yubikey-manager-qt breeze-gtk kde-gtk-config \
+    xdg-desktop-portal xdg-desktop-portal-kde plasma-browser-integration \
+    pinentry util-linux bat conky discord dmidecode firewalld flatpak \
+    mailspring ncdu neofetch qbittorrent quassel-client ripgrep signal-desktop \
+    sl steam tmux torbrowser-launcher gzip unrar zip unzip jq xclip --noconfirm
 
 echo "New user"
 read USER_NAME

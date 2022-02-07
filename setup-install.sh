@@ -32,7 +32,7 @@ fi
 sgdisk -Z ${DISK}
 sgdisk -a 2048 -o ${DISK}
 
-sgdisk -n ${BOOT_DISK_NUM}:0:+512M ${DISK}
+sgdisk -n ${BOOT_DISK_NUM}:0:+1G ${DISK}
 sgdisk -n ${ENC_DISK_NUM}:0:0 ${DISK}
 
 sgdisk -t ${BOOT_DISK_NUM}:ef00 ${DISK}
@@ -106,7 +106,7 @@ echo "Move 'keyboard encrypt lvm2 resume' before filesystem in HOOKS. IF USING N
 read TMP
 vim /mnt/etc/mkinitcpio.conf
 
-arch-chroot /mnt mkinitcpio -p linux
+arch-chroot /mnt mkinitcpio -P
 
 DEC_ROOT=$(echo ${VG_ROOT_NAME} | sed 's|mapper/||' | sed 's|-|/|')
 DEC_SWAP=$(echo ${VG_SWAP_NAME} | sed 's|mapper/||' | sed 's|-|/|')

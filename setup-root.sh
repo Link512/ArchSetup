@@ -43,11 +43,11 @@ pacman -S xorg xorg-server xorg-apps xorg-xinit --noconfirm
 # greeter & plasma
 
 pacman -S plasma --noconfirm
-pacman -S dolphin dolphin-plugins ark kamoso kcalc kdenetwork-filesharing kfind kipi-plugins kmix kgpg knotes kompare konsole kamoso kwalletmanager print-manager --noconfirm
+pacman -S dolphin dolphin-plugins ark kamoso kcalc kdenetwork-filesharing kfind kipi-plugins kmix kgpg knotes kompare konsole kamoso kwalletmanager ksshaskpass print-manager --noconfirm
 
 # sound, network and such
 
-pacman -S wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet alsa-utils alsa-plugins pulseaudio pulseaudio-alsa pavucontrol \
+pacman -S wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet alsa-utils alsa-plugins pipewire-alsa pipewire-jack pipewire-media-session pipewire-pulse pavucontrol \
     cups cups-pdf ghostscript gsfonts --noconfirm
 
 systemctl enable NetworkManager.service

@@ -52,6 +52,8 @@ When=PostTransaction
 NeedsTargets
 Exec=/bin/sh -c 'while read -r trg; do case $trg in linux) exit 0; esac; done; /usr/bin/mkinitcpio -P'
 EOF
+    echo "reboot needed to blacklist mesa drivers"
+    exit 0
 fi
 
 pacman -S xorg xorg-server xorg-apps xorg-xinit --noconfirm

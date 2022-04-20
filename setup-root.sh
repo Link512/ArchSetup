@@ -65,7 +65,7 @@ pacman -S dolphin dolphin-plugins ark kamoso kcalc kdenetwork-filesharing kfind 
 
 # sound, network and such
 
-pacman -S wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet alsa-utils alsa-plugins pipewire-alsa pipewire-jack pipewire-media-session pipewire-pulse pavucontrol \
+pacman -S wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet alsa-utils alsa-plugins pipewire-alsa pipewire-jack pipewire-media-session pipewire-pulse wireplumber pavucontrol \
     cups cups-pdf ghostscript gsfonts --noconfirm
 
 systemctl enable NetworkManager.service
@@ -81,6 +81,10 @@ pacman -S firefox libfido2 yubikey-manager-qt breeze-gtk kde-gtk-config \
     pinentry util-linux bat conky discord dmidecode firewalld flatpak \
     mailspring ncdu neofetch qbittorrent quassel-client ripgrep signal-desktop \
     sl steam tmux torbrowser-launcher gzip unrar zip unzip jq xclip --noconfirm
+
+# fonts
+pacman -S ttf-fira-code ttf-droid \
+    xorg-font-util xorg-fonts-100dpi xorg-fonts-75dpi xorg-fonts-encodings --noconfirm
 
 echo "New user"
 read USER_NAME

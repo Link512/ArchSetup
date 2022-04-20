@@ -78,7 +78,7 @@ pacman -S reflector rsync curl --noconfirm
 
 reflector --verbose --country Netherlands -l 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
-pacstrap /mnt base base-devel linux linux-firmware linux-headers ${CPU}-ucode vim curl lvm2 man-db dhclient networkmanager wpa_supplicant wireless_tools
+pacstrap /mnt base base-devel linux linux-firmware linux-headers ${CPU}-ucode vim vi curl lvm2 man-db dhclient networkmanager wpa_supplicant wireless_tools
 genfstab -U /mnt >>/mnt/etc/fstab
 
 HOSTNAME="linkarch"

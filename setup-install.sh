@@ -69,10 +69,8 @@ mkfs.ext4 ${VG_HOME_NAME}
 mkswap ${VG_SWAP_NAME}
 
 mount ${VG_ROOT_NAME} /mnt
-mkdir /mnt/boot
-mount ${BOOT_DISK} /mnt/boot
-mkdir /mnt/home
-mount ${VG_HOME_NAME} /mnt/home
+mount --mkdir ${BOOT_DISK} /mnt/boot
+mount --mkdir ${VG_HOME_NAME} /mnt/home
 swapon ${VG_SWAP_NAME}
 
 pacman -Sy
@@ -80,7 +78,7 @@ pacman -S reflector rsync curl --noconfirm
 
 reflector --verbose --country Netherlands -l 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
-pacstrap /mnt base base-devel linux linux-firmware ${CPU}-ucode vim curl lvm2 man-db dhclient networkmanager wpa_supplicant wireless_tools
+pacstrap /mnt base base-devel linux linux-firmware linux-headers ${CPU}-ucode vim curl lvm2 man-db dhclient networkmanager wpa_supplicant wireless_tools
 genfstab -U /mnt >>/mnt/etc/fstab
 
 HOSTNAME="linkarch"

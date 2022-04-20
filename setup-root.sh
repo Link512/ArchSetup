@@ -15,6 +15,11 @@ reflector --verbose --country Netherlands -l 10 --protocol https --sort rate --s
 # Base
 pacman -S pacman-contrib curl git vim --noconfirm
 
+echo "Uncomment [multilib] section pls. Press enter."
+read TMP
+vim /etc/pacman.conf
+pacman -Sy
+
 # video stuff
 echo "Which driver nvidia/mesa/amd/intel?"
 
@@ -23,19 +28,30 @@ read DRV_IN
 if [ "$DRV_IN" == "mesa" ]; then
     pacman -S mesa --noconfirm
 elif [ "$DRV_IN" == "amd" ]; then
-    echo "Uncomment [multilib] section pls. Press enter."
-    read TMP
-    vim /etc/pacman.conf
-    pacman -Sy
     pacman -S mesa lib32-mesa xf86-video-amdgpu amdvlk lib32-amdvlk libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau --noconfirm
 elif [ "$DRV_IN" == "intel" ]; then
-    echo "Uncomment [multilib] section pls. Press enter."
-    read TMP
-    vim /etc/pacman.conf
-    pacman -Sy
     pacman -S mesa lib32-mesa xf86-video-intel vulkan-intel --noconfirm
 elif [ "$DRV_IN" == "nvidia" ]; then
-    pacman -S mesa nvidia --noconfirm
+    pacman -S mesa nvidia lib32-nvidia-utils --noconfirm
+    echo "Add nvidia-drm.modeset=1 to kernel params at boot"
+    sleep 4
+    vim /mnt/boot/loader/entries/arch.conf
+    cat <<EOF >/etc/pacman.d/hooks/nvidia.hook
+[Trigger]
+Operation=Install
+Operation=Upgrade
+Operation=Remove
+Type=Package
+Target=nvidia
+Target=linux
+
+[Action]
+Description=Update Nvidia module in initcpio
+Depends=mkinitcpio
+When=PostTransaction
+NeedsTargets
+Exec=/bin/sh -c 'while read -r trg; do case $trg in linux) exit 0; esac; done; /usr/bin/mkinitcpio -P'
+EOF
 fi
 
 pacman -S xorg xorg-server xorg-apps xorg-xinit --noconfirm
@@ -73,6 +89,6 @@ passwd "${USER_NAME}"
 
 vim /etc/sudoers
 
-mkdir /home/${USER_NAME}/setup
-curl -o /home/${USER_NAME}/setup/usr.sh https://raw.githubusercontent.com/Link512/ArchSetup/master/setup-usr.sh
-chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}/setup
+mkdir "/home/${USER_NAME}/setup"
+curl -o "/home/${USER_NAME}/setup/usr.sh" https://raw.githubusercontent.com/Link512/ArchSetup/master/setup-usr.sh
+chown -R "${USER_NAME}:${USER_NAME}" "/home/${USER_NAME}/setup"

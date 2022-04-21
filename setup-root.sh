@@ -72,7 +72,7 @@ systemctl enable NetworkManager.service
 
 # programming stuff
 
-pacman -S pyenv go gnupg zsh zsh-completions zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search htop openssh fzf vlc --noconfirm
+pacman -S pyenv go git-delta gnupg zsh zsh-completions zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search htop openssh fzf vlc --noconfirm
 
 # basics
 

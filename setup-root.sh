@@ -35,7 +35,7 @@ elif [ "$DRV_IN" == "nvidia" ]; then
     pacman -S mesa nvidia lib32-nvidia-utils --noconfirm
     echo "Add nvidia-drm.modeset=1 to kernel params at boot"
     sleep 4
-    vim /mnt/boot/loader/entries/arch.conf
+    vim /boot/loader/entries/arch.conf
     cat <<EOF >/etc/pacman.d/hooks/nvidia.hook
 [Trigger]
 Operation=Install
@@ -61,11 +61,11 @@ pacman -S xorg xorg-server xorg-apps xorg-xinit --noconfirm
 # greeter & plasma
 
 pacman -S plasma --noconfirm
-pacman -S dolphin dolphin-plugins ark kamoso kcalc kdenetwork-filesharing kfind kipi-plugins kmix kgpg knotes kompare konsole kamoso kwalletmanager ksshaskpass print-manager --noconfirm
+pacman -S dolphin dolphin-plugins ark kamoso kcalc kdenetwork-filesharing kfind kmix kgpg knotes kompare konsole kamoso kwalletmanager ksshaskpass print-manager --noconfirm
 
 # sound, network and such
 
-pacman -S wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet alsa-utils alsa-plugins pipewire-alsa pipewire-jack pipewire-media-session pipewire-pulse wireplumber pavucontrol \
+pacman -S wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet alsa-utils alsa-plugins pipewire-alsa pipewire-jack pipewire-pulse wireplumber pavucontrol \
     cups cups-pdf ghostscript gsfonts --noconfirm
 
 systemctl enable NetworkManager.service
@@ -79,7 +79,7 @@ pacman -S pyenv go git-delta gnupg zsh zsh-completions zsh-autosuggestions zsh-s
 pacman -S firefox libfido2 yubikey-manager-qt breeze-gtk kde-gtk-config \
     xdg-desktop-portal xdg-desktop-portal-kde plasma-browser-integration \
     pinentry util-linux bat conky discord dmidecode firewalld flatpak \
-    mailspring ncdu neofetch qbittorrent quassel-client ripgrep signal-desktop \
+    ncdu neofetch qbittorrent quassel-client ripgrep signal-desktop \
     sl steam tmux torbrowser-launcher gzip unrar zip unzip jq xclip --noconfirm
 
 # fonts

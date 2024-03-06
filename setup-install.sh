@@ -6,7 +6,7 @@ timedatectl set-ntp true
 modprobe dm-crypt
 
 echo "Disk? e.g. /dev/sda"
-read DISK
+read -r DISK
 
 BOOT_DISK_NUM=1
 ENC_DISK_NUM=2
@@ -23,7 +23,7 @@ CPU=intel
 
 echo "Which cpu intel/amd? [intel]"
 
-read CPU_IN
+read -r CPU_IN
 
 if [ -n "$CPU_IN" ]; then
     CPU=${CPU_IN}
@@ -38,11 +38,11 @@ sgdisk -n ${ENC_DISK_NUM}:0:0 ${DISK}
 sgdisk -t ${BOOT_DISK_NUM}:ef00 ${DISK}
 sgdisk -t ${ENC_DISK_NUM}:8e00 ${DISK}
 
-cryptsetup luksFormat ${ENC_DISK}
+cryptsetup luksFormat "${ENC_DISK}"
 
 DM_NAME=lvm
 
-cryptsetup open --type luks ${ENC_DISK} ${DM_NAME}
+cryptsetup open --type luks "${ENC_DISK}" ${DM_NAME}
 
 VG_NAME=volume
 
@@ -50,10 +50,10 @@ pvcreate /dev/mapper/${DM_NAME}
 vgcreate ${VG_NAME} /dev/mapper/${DM_NAME}
 
 echo "How much for SWAP? e.g. 8G"
-read SWAP_SIZE
+read -r SWAP_SIZE
 
 echo "How much for /root partition? Rest will be /home e.g. 10G"
-read HOME_SIZE
+read -r HOME_SIZE
 
 lvcreate -L${SWAP_SIZE} ${VG_NAME} -n swap
 lvcreate -L${HOME_SIZE} ${VG_NAME} -n root
@@ -78,7 +78,7 @@ pacman -S reflector rsync curl --noconfirm
 
 reflector --verbose --country Netherlands -l 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
-pacstrap /mnt base base-devel linux linux-firmware linux-headers ${CPU}-ucode vim vi curl lvm2 man-db dhclient networkmanager wpa_supplicant wireless_tools
+pacstrap /mnt base base-devel linux linux-firmware linux-headers "${CPU}-ucode" vim vi curl lvm2 man-db dhclient networkmanager wpa_supplicant wireless_tools
 genfstab -U /mnt >>/mnt/etc/fstab
 
 HOSTNAME="linkarch"
@@ -101,7 +101,7 @@ cat <<EOF >/mnt/etc/hosts
 EOF
 
 echo "Move 'keyboard encrypt lvm2 resume' before filesystem in HOOKS. IF USING NVME set MODULES=(nvme) Press enter"
-read TMP
+read -r _TMP
 vim /mnt/etc/mkinitcpio.conf
 
 arch-chroot /mnt mkinitcpio -P
@@ -115,14 +115,13 @@ arch-chroot /mnt bootctl install
 
 cat <<EOF >/mnt/boot/loader/loader.conf
 default arch
-timeout 5
+timeout 10
 editor 0
 EOF
 
 cat <<EOF >/mnt/boot/loader/entries/arch.conf
 title Arch Linux
 linux /vmlinuz-linux
-initrd  /${CPU}-ucode.img
 initrd  /initramfs-linux.img
 options cryptdevice=UUID=${PART_UUID}:${DM_NAME} root=${DEC_ROOT} resume=${DEC_SWAP} acpi_osi=Linux quiet rw
 EOF

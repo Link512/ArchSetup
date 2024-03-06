@@ -13,7 +13,6 @@ yay -S 1password 1password-cli \
     insync insync-dolphin \
     aws-cli-v2-bin \
     dropbox \
-    mailspring \
     mullvad-vpn-bin \
     whatsapp-for-linux \
     tfenv sshrc spotify up visual-studio-code-bin

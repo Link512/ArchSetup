@@ -58,6 +58,9 @@ fi
 
 pacman -S xorg xorg-server xorg-apps xorg-xinit --noconfirm
 
+# audio stuff first to because of pipewire
+pacman -S pipewire-alsa pipewire-jack pipewire-pulse wireplumber --noconfirm
+
 # greeter & plasma
 
 pacman -S plasma --noconfirm
@@ -65,7 +68,8 @@ pacman -S dolphin dolphin-plugins ark kamoso kcalc kdenetwork-filesharing kfind 
 
 # sound, network and such
 
-pacman -S wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet alsa-utils alsa-plugins pipewire-alsa pipewire-jack pipewire-pulse wireplumber pavucontrol \
+pacman -S wpa_supplicant wireless_tools networkmanager nm-connection-editor network-manager-applet \
+    alsa-utils alsa-plugins pavucontrol \
     cups cups-pdf ghostscript gsfonts --noconfirm
 
 systemctl enable NetworkManager.service

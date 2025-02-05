@@ -11,7 +11,7 @@ cd .. && rm -rf yay
 
 yay -S 1password 1password-cli \
     insync insync-dolphin \
-    aws-cli-v2-bin \
+    aws-cli-v2 \
     dropbox \
     mullvad-vpn-bin \
     whatsapp-for-linux \

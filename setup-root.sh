@@ -64,7 +64,7 @@ pacman -S pipewire-alsa pipewire-jack pipewire-pulse wireplumber --noconfirm
 # greeter & plasma
 
 pacman -S plasma --noconfirm
-pacman -S dolphin dolphin-plugins ark kamoso kcalc kdenetwork-filesharing kfind kmix kgpg knotes kompare konsole kamoso kwalletmanager ksshaskpass print-manager --noconfirm
+pacman -S dolphin dolphin-plugins ark kamoso kcalc kdenetwork-filesharing kfind kmix kgpg kompare konsole kamoso kwalletmanager ksshaskpass print-manager --noconfirm
 
 # sound, network and such
 
